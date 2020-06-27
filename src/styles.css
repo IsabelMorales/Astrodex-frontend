@@ -1,0 +1,31 @@
+@import "../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-lists/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-popups/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-react-calendars/styles/material.css";
+
+.rojo{
+    color: red;
+}
+
+.purple{
+    background-color: #6b48b0;
+    border-color: #6b48b0;
+    
+    /*
+    #7f62bb
+    #e3165b
+    
+    */
+}
+
+.boton{
+    display: flex;
+    margin-left: 6rem;
+}
+
+h1{
+    display: flex;
+    justify-content: center;
+}
