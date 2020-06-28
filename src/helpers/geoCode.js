@@ -1,9 +1,8 @@
-var requests = require('requests');
-var axios = require ('axios');
+// var requests = require('requests');
+const axios = require("axios");
 
-function geoCode(country,estate,city){
-
-    /*requests("https://api.opencagedata.com/geocode/v1/json?q=Rua+Cafel%C3%A2ndia%2C+Carapicu%C3%ADba%2C+Brasil&key=37222f6656c044859905d898d1e7583a")
+async function geoCode(country, estate, city) {
+  /*requests("https://api.opencagedata.com/geocode/v1/json?q=Rua+Cafel%C3%A2ndia%2C+Carapicu%C3%ADba%2C+Brasil&key=37222f6656c044859905d898d1e7583a")
 	.on('data', function (chunk) {
 	  //console.log(chunk)
 		console.log(chunk);
@@ -16,23 +15,33 @@ function geoCode(country,estate,city){
 
     //const res = axios.get('https://api.opencagedata.com/geocode/v1/json?q=Rua+Cafel%C3%A2ndia%2C+Carapicu%C3%ADba%2C+Brasil&key=37222f6656c044859905d898d1e7583a');
 	//console.log(res);*/
-	
-	var apikey = '37222f6656c044859905d898d1e7583a';
+
+  let apiKey = "37222f6656c044859905d898d1e7583a";
   //var latitude = '51.0';
   //var longitude = '7.0';
-	var cosa;
-  var api_url = 'https://api.opencagedata.com/geocode/v1/json'
+  let api_url = "https://api.opencagedata.com/geocode/v1/json";
 
-  var request_url = api_url
+  const requestUrl = `${api_url}?key=${apiKey}&q=${encodeURIComponent(
+    `${city},${estate},${country}`
+  )}&pretty=1&no_annotations=1`;
+  /* var request_url = api_url
     + '?'
     + 'key=' + apikey
     + '&q=' + encodeURIComponent(city + ',' + estate+','+country)
     + '&pretty=1'
-    + '&no_annotations=1';
+    + '&no_annotations=1'; */
 
   // see full list of required and optional parameters:
   // https://opencagedata.com/api#forward
 
+  try {
+    const response = await axios.get(requestUrl);
+    const data = response.json();
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+  /* 
   var request = new XMLHttpRequest();
   request.open('GET', request_url, true);
 
@@ -66,7 +75,7 @@ function geoCode(country,estate,city){
   
   request.send();  // make the request
   console.log(cosa);
-  return cosa;
+  return cosa; */
 }
 
 exports.geoCode = geoCode;
