@@ -7,10 +7,11 @@ import { DateTimePickerComponent } from "@syncfusion/ej2-react-calendars";
 import "../styles.css";
 
 // La api
-import { geoUbicacion } from "../helpers/api";
+import { geoUbicacion , planetas } from "../helpers/api";
+
 
 const SignupForm = () => {
-  const [isUbicacion, setUbicacion] = useState({});
+ // const [isUbicacion, setUbicacion] = useState({});
 
   const formik = useFormik({
     initialValues: {
@@ -25,6 +26,10 @@ const SignupForm = () => {
       estate: "",
       city: "",
       datetimepicker: new Date(),
+      lat: "",
+      lng: "",
+      sun: "",
+      moon: ""
     },
     validationSchema: Yup.object({
       user: Yup.string().max(15, "Máximo 15 caracteres").required("Requerido"),
@@ -59,7 +64,13 @@ const SignupForm = () => {
       console.log("On Submit");
       const ubicacion = await geoUbicacion(city, estate, country);
       console.log(ubicacion);
-      setUbicacion(ubicacion);
+      formik.values.lat=ubicacion.lat;
+      formik.values.lng=ubicacion.lng;
+      const planetasData = await planetas();
+      formik.values.sun=planetasData[0];
+      formik.values.moon=planetasData[1];
+      console.log('desde el componente', planetasData);
+      alert(JSON.stringify(values, null, 2));
     },
   });
 
@@ -172,7 +183,7 @@ const SignupForm = () => {
             onChange={formik.handleChange}
             id="countryId"
           >
-            <option value="">Select Country</option>
+          <option value="">Select Country</option>
           </select>
           <label htmlFor="stateId">Estado</label>
           <select
@@ -182,7 +193,7 @@ const SignupForm = () => {
             onChange={formik.handleChange}
             id="stateId"
           >
-            <option value="">Select State</option>
+          <option value="">Select State</option>
           </select>
           <label htmlFor="cityId">Ciudad</label>
           <select
@@ -192,7 +203,7 @@ const SignupForm = () => {
             onChange={formik.handleChange}
             id="cityId"
           >
-            <option value="">Select City</option>
+          <option value="">Select City</option>
           </select>
 
           <label htmlFor="datetimepicker">Fecha de nacimiento</label>

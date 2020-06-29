@@ -17,8 +17,8 @@
     "react-dom": "^16.13.1",
     "react-formik-ui": "^4.1.2",
     "react-helmet": "^6.1.0",
-    "react-native": "^0.62.2",
     "react-scripts": "3.4.1",
+    "requests": "^0.3.0",
     "yup": "^0.29.1"
   },
   "scripts": {
